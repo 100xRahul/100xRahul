@@ -11,24 +11,15 @@
 
 </div>
 
-<br/>
-
-```yaml
-name:      CryptoMaN-Rahul
-roles:     [Full-Stack Dev, Security Researcher, Cloud Engineer]
-stack:     [Node.js, Python, TypeScript, AWS, Terraform, Docker]
-building:  production-grade systems that actually ship
-interests: [Backend, Security, Cloud, Crypto, Esports]
-open_to:   collabs on anything interesting
-```
-
----
-
 ## 🛠 Stack
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=nodejs,ts,py,aws,terraform,docker,react,git,linux,bash&theme=dark&perline=10" />
+<img src="https://skillicons.dev/icons?i=nodejs,ts,py,go,aws,terraform,docker,react,git,linux&theme=dark&perline=10" />
+
+<br/>
+
+![Effect TS](https://img.shields.io/badge/Effect--TS-6366F1?style=flat-square&logo=typescript&logoColor=white)
 
 </div>
 
