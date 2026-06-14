@@ -19,7 +19,7 @@
 
 <br/>
 
-![Effect TS](https://img.shields.io/badge/Effect--TS-6366F1?style=flat-square&logo=typescript&logoColor=white)
+![Effect TS](https://img.shields.io/badge/Effect--TS-6366F1?style=flat-square&logo=effect&logoColor=white)
 
 </div>
 
