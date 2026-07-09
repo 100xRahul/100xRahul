@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import calendar
+import hashlib
 import html
 import json
 import os
@@ -44,7 +45,9 @@ DEFAULT_LOGIN = "CryptoMaN-Rahul"
 DEFAULT_LINKEDIN = "linkedin.com/in/0x-rahul"
 DEFAULT_X = "@100x_rahul"
 DEFAULT_ASCII = ROOT / "assets" / "profile_ascii.txt"
+DEFAULT_README = ROOT / "README.md"
 DEFAULT_STATS_CACHE = ROOT / "assets" / "profile_stats_cache.json"
+README_REPO = "CryptoMaN-Rahul/CryptoMaN-Rahul"
 USER_AGENT = "cryptoman-rahul-profile-card"
 DEFAULT_PHOTO_CROP = "0.15,0.03,0.85,0.72"
 
@@ -849,9 +852,34 @@ def build_svg(ascii_lines: list[str], stats: GitHubStats, theme: dict[str, str])
 '''
 
 
+def svg_cache_version(*svg_paths: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(svg_paths):
+        digest.update(path.read_bytes())
+    return digest.hexdigest()[:7]
+
+
+def update_readme_cache_bust(version: str, readme_path: Path = DEFAULT_README) -> bool:
+    content = f'''<a href="https://github.com/{README_REPO}">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/{README_REPO}/main/dark_mode.svg?v={version}">
+    <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/{README_REPO}/main/light_mode.svg?v={version}">
+  </picture>
+</a>
+'''
+    if readme_path.read_text(encoding="utf-8") == content:
+        return False
+    readme_path.write_text(content, encoding="utf-8")
+    return True
+
+
 def build(ascii_lines: list[str], stats: GitHubStats) -> None:
+    svg_paths: list[Path] = []
     for theme in THEMES.values():
-        (ROOT / theme["file"]).write_text(build_svg(ascii_lines, stats, theme), encoding="utf-8")
+        path = ROOT / theme["file"]
+        path.write_text(build_svg(ascii_lines, stats, theme), encoding="utf-8")
+        svg_paths.append(path)
+    update_readme_cache_bust(svg_cache_version(*svg_paths))
 
 
 def load_ascii(args: argparse.Namespace) -> list[str]:
