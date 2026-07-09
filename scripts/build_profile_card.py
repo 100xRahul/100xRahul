@@ -36,6 +36,7 @@ TERM_FONT_SIZE = 19
 TERM_COLUMNS = 61
 REQUEST_TIMEOUT = 12
 LINE_STAT_WORKERS = 8
+TICK_X = 1190
 
 DATE_OF_BIRTH = date(2002, 12, 21)
 DEFAULT_LOGIN = "CryptoMaN-Rahul"
@@ -44,7 +45,7 @@ DEFAULT_X = "@100x_rahul"
 DEFAULT_ASCII = ROOT / "assets" / "profile_ascii.txt"
 DEFAULT_STATS_CACHE = ROOT / "assets" / "profile_stats_cache.json"
 USER_AGENT = "cryptoman-rahul-profile-card"
-DEFAULT_PHOTO_CROP = "0.12,0.03,0.88,0.54"
+DEFAULT_PHOTO_CROP = "0.12,0.03,0.88,0.72"
 
 
 @dataclass(frozen=True)
@@ -68,6 +69,8 @@ class GitHubStats:
     lines_deleted: int | None
     visible_contributions: int | None
     private_contributions: int | None
+    commit_contributions: int | None
+    pull_request_contributions: int | None
     followers: int
     languages: list[str]
     repos_for_line_stats: list[RepoSnapshot]
@@ -143,6 +146,24 @@ def age_since(start: date, today: date | None = None) -> str:
         months += 12
 
     return f"{years} years, {months} months, {days} days"
+
+
+def age_since_short(start: date, today: date | None = None) -> str:
+    today = today or date.today()
+    years = today.year - start.year
+    months = today.month - start.month
+    days = today.day - start.day
+
+    if days < 0:
+        months -= 1
+        previous_month = today.month - 1 or 12
+        previous_year = today.year if today.month > 1 else today.year - 1
+        days += calendar.monthrange(previous_year, previous_month)[1]
+    if months < 0:
+        years -= 1
+        months += 12
+
+    return f"{years}y {months}m {days}d"
 
 
 def parse_github_date(value: str | None) -> date | None:
@@ -237,6 +258,8 @@ def fetch_graphql_stats(login: str, token: str) -> GitHubStats:
         createdAt
         followers { totalCount }
         contributionsCollection {
+          totalCommitContributions
+          totalPullRequestContributions
           restrictedContributionsCount
           contributionCalendar { totalContributions }
         }
@@ -299,8 +322,10 @@ def fetch_graphql_stats(login: str, token: str) -> GitHubStats:
         lines_deleted=None,
         visible_contributions=calendar_data.get("totalContributions"),
         private_contributions=contributions.get("restrictedContributionsCount"),
+        commit_contributions=contributions.get("totalCommitContributions"),
+        pull_request_contributions=contributions.get("totalPullRequestContributions"),
         followers=int(user["followers"]["totalCount"]),
-        languages=[name for name, _count in language_counts.most_common(5)],
+        languages=[name for name, _count in language_counts.most_common(8)],
         repos_for_line_stats=[
             RepoSnapshot(
                 name=repo["nameWithOwner"],
@@ -343,8 +368,10 @@ def fetch_rest_stats(login: str, token: str | None) -> GitHubStats:
         lines_deleted=None,
         visible_contributions=None,
         private_contributions=None,
+        commit_contributions=None,
+        pull_request_contributions=None,
         followers=int(user.get("followers") or 0),
-        languages=[name for name, _count in language_counts.most_common(5)],
+        languages=[name for name, _count in language_counts.most_common(8)],
         repos_for_line_stats=[
             RepoSnapshot(
                 name=repo["full_name"],
@@ -517,15 +544,21 @@ def fetch_github_stats(
 
 
 def language_summary(stats: GitHubStats) -> str:
-    if stats.languages:
-        return ", ".join(stats.languages)
+    languages = [language for language in stats.languages if language != "HTML"]
+    if languages:
+        return ", ".join(languages[:5])
     return "TypeScript, Python, Go, JavaScript"
 
 
 def contribution_summary(stats: GitHubStats) -> str:
     if stats.visible_contributions is None:
         return "Contributed: unavailable"
-    return f"Contributed: {format_int(stats.visible_contributions)}"
+    suffix = ""
+    if stats.pull_request_contributions:
+        suffix = f" | PRs: {format_int(stats.pull_request_contributions)}"
+    if stats.private_contributions is None:
+        return f"{format_int(stats.visible_contributions)} visible{suffix}"
+    return f"{format_int(stats.visible_contributions)} visible + {format_int(stats.private_contributions)} private{suffix}"
 
 
 def commit_summary(stats: GitHubStats) -> str:
@@ -540,6 +573,30 @@ def lines_summary(stats: GitHubStats) -> str:
         return "unavailable"
     net = stats.lines_added - stats.lines_deleted
     return f"{format_int(net)} ({format_int(stats.lines_added)}++, {format_int(stats.lines_deleted)}--)"
+
+
+def animated_seconds(y: int) -> str:
+    frames = []
+    for second in range(60):
+        start = second / 60
+        end = (second + 1) / 60
+        if second == 0:
+            key_times = "0;0.0165;0.0167;1"
+            values = "1;1;0;0"
+        elif second == 59:
+            key_times = f"0;{start:.4f};{start + 0.0001:.4f};1"
+            values = "0;0;1;1"
+        else:
+            key_times = f"0;{start:.4f};{start + 0.0001:.4f};{end:.4f};{end + 0.0001:.4f};1"
+            values = "0;0;1;1;0;0"
+        frames.append(
+            f'<text x="{TICK_X}" y="{y}" class="terminal value" opacity="0">'
+            f"{second:02d}s"
+            f'<animate attributeName="opacity" dur="60s" repeatCount="indefinite" '
+            f'keyTimes="{key_times}" values="{values}"/>'
+            "</text>"
+        )
+    return "\n".join(frames)
 
 
 def parse_crop_spec(spec: str) -> tuple[float, float, float, float]:
@@ -560,31 +617,31 @@ def profile_lines(stats: GitHubStats) -> list[tuple[str, str | None]]:
     linkedin = env_or("PROFILE_LINKEDIN", DEFAULT_LINKEDIN)
     x_handle = env_or("PROFILE_X", DEFAULT_X)
 
-    location = stats.location.title() if stats.location else "Goa, India"
     return [
         ("System", None),
         ("OS", os_label),
-        ("Uptime", age_since(DATE_OF_BIRTH)),
+        ("Uptime", age_since_short(DATE_OF_BIRTH)),
         ("Host", host),
         ("Kernel", kernel),
         ("Focus", focus),
         ("Since", f"GitHub: {format_date(stats.created_at)}"),
         ("", ""),
         ("Work", None),
-        ("Cloud.Backend", "APIs, VPS ops, infra automation"),
-        ("Security", "bug bounty, harnesses, backend-only design"),
-        ("AI.Automation", "agents, scrapers, workflows"),
+        ("Backend", "APIs, services, databases, integrations"),
+        ("Cloud", "Linux servers, deployments, infra automation"),
+        ("Security", "AppSec research, bug bounty, secure design"),
+        ("Automation", "AI agents, scrapers, workflow tooling"),
         ("Languages", language_summary(stats)),
         ("", ""),
         ("Contact", None),
         ("GitHub", f"github.com/{stats.login}"),
         ("LinkedIn", linkedin),
-        ("X", x_handle),
-        ("Location", location),
+        ("X", f"https://x.com/{x_handle.removeprefix('@')}"),
         ("", ""),
         ("GitHub Stats", None),
-        ("Repos", f"{format_int(stats.public_repos)} {{{contribution_summary(stats)}}} | Stars: {format_int(stats.stars)}"),
-        ("Commits", f"{commit_summary(stats)} | Followers: {format_int(stats.followers)}"),
+        ("Repos", f"{format_int(stats.public_repos)} | Stars: {format_int(stats.stars)}"),
+        ("Commits", f"{commit_summary(stats)} repo | {format_int(stats.commit_contributions)} contrib | Followers: {format_int(stats.followers)}"),
+        ("Contribs", contribution_summary(stats)),
         ("Lines of Code on GitHub", lines_summary(stats)),
     ]
 
@@ -652,6 +709,19 @@ def svg_text_lines(lines: Iterable[str], x: int, y: int) -> str:
 
 def render_line(label: str, value: str, y: int, theme: dict[str, str]) -> str:
     dots = leader(label, value)
+    if label == "Uptime":
+        tick_value = f"{value} + 59s"
+        dots = leader(label, tick_value)
+        return (
+            f'<text x="{TERM_X}" y="{y}" class="terminal">'
+            f'<tspan class="label">{escape_text(label)}:</tspan> '
+            f'<tspan class="muted">{dots}</tspan> '
+            f'<tspan class="value">{escape_text(value)}</tspan> '
+            f'<tspan class="muted">+</tspan>'
+            f'<tspan class="cursor">_</tspan>'
+            "</text>\n"
+            f"{animated_seconds(y)}"
+        )
     if label == "Lines of Code on GitHub" and " (" in value and "++, " in value and "--)" in value:
         net, rest = value.split(" (", 1)
         additions, deletions = rest.removesuffix(")").split(", ", 1)
@@ -727,6 +797,13 @@ def build_svg(ascii_lines: list[str], stats: GitHubStats, theme: dict[str, str])
     .value {{ fill: {theme["value"]}; }}
     .green {{ fill: {theme["green"]}; }}
     .red {{ fill: {theme["red"]}; }}
+    .cursor {{
+      fill: {theme["value"]};
+      animation: blink 1s steps(2, start) infinite;
+    }}
+    @keyframes blink {{
+      50% {{ opacity: 0; }}
+    }}
   </style>
   <rect width="{WIDTH}" height="{HEIGHT}" rx="18" fill="{theme["canvas"]}"/>
   <rect x="24" y="24" width="{WIDTH - 48}" height="{HEIGHT - 48}" rx="18" fill="{theme["panel"]}" stroke="{theme["border"]}" stroke-width="2"/>

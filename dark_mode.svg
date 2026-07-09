@@ -17,71 +17,139 @@
     .value { fill: #a5d6ff; }
     .green { fill: #3fb950; }
     .red { fill: #ff7b72; }
+    .cursor {
+      fill: #a5d6ff;
+      animation: blink 1s steps(2, start) infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
   </style>
   <rect width="1280" height="720" rx="18" fill="#0d1117"/>
   <rect x="24" y="24" width="1232" height="672" rx="18" fill="#161b22" stroke="#30363d" stroke-width="2"/>
   <text class="ascii" xml:space="preserve">
 <tspan x="70" y="82.0"></tspan>
 <tspan x="70" y="97.0"></tspan>
-<tspan x="70" y="112.0">                     *=</tspan>
-<tspan x="70" y="127.0">              :@%%*=%@%+ .</tspan>
-<tspan x="70" y="142.0">            *@%%#%%#%%#%%%*</tspan>
-<tspan x="70" y="157.0">           %@#%%%%%%%%%%%%%:</tspan>
-<tspan x="70" y="172.0">          .%%%%%@%%%@%%%%%%#</tspan>
-<tspan x="70" y="187.0">          %%%%%%%@%#%%%%%%%%#</tspan>
-<tspan x="70" y="202.0">         %%%%%@%@%%%%@%%%#%%%%-</tspan>
-<tspan x="70" y="217.0">        #@%%@%%%%%%%%@@@%%%%%#%#</tspan>
-<tspan x="70" y="232.0">        @%@@@@%%%@%%@%%@@@@%%%#@:</tspan>
-<tspan x="70" y="247.0">        %%%%%@@%%%%%@%%@@@@@@%%%#</tspan>
-<tspan x="70" y="262.0">        @%%%%%%%%#%%%%%@@@@@%%%%@#</tspan>
-<tspan x="70" y="277.0">       :@%@%%#%@@%%%%%@@@@@@%%@%%#</tspan>
-<tspan x="70" y="292.0">       *@%@@%##%%%%@%%%%%@@@@@@@%%-</tspan>
-<tspan x="70" y="307.0">       %@%@%%%%%%%%%%%%%%@@@@@@@%@+</tspan>
-<tspan x="70" y="322.0">       @%@@@@@@%%@%%%%*==+%@%@@%%#</tspan>
-<tspan x="70" y="337.0">       %%@@@@%@%%%%#*-   :+%%@@%@*</tspan>
-<tspan x="70" y="352.0">       @@@@@@@####*=:    .:*@%@%%.</tspan>
-<tspan x="70" y="367.0">       *%%@@@%#+=-:        :%@%@=</tspan>
-<tspan x="70" y="382.0">        @%@@##+.           .*@%%</tspan>
-<tspan x="70" y="397.0">        #@%%*-.             =@%:</tspan>
-<tspan x="70" y="412.0">        =%**=-+#+:  .=**=-- :%@</tspan>
-<tspan x="70" y="427.0">        .@=*%@@@@*-:=#@@%##= **</tspan>
-<tspan x="70" y="442.0">         #+@%%%%@%- .*%%#*=- +</tspan>
-<tspan x="70" y="457.0">         :**%##-*#.  -=+**-  -</tspan>
-<tspan x="70" y="472.0">         +-.-=:.-=    ..     .-</tspan>
-<tspan x="70" y="487.0">        :*:     ::.           +</tspan>
-<tspan x="70" y="502.0">        .+:.    :-           .:</tspan>
-<tspan x="70" y="517.0">         +-:    -:           :</tspan>
-<tspan x="70" y="532.0">         *=:   .-:.         ::</tspan>
-<tspan x="70" y="547.0">         #+-.  :=*#=++     .:-</tspan>
-<tspan x="70" y="562.0">         %+=:.  =%+:-+    ..--</tspan>
-<tspan x="70" y="577.0">         +*+:.  :%*=#*    .:=</tspan>
-<tspan x="70" y="592.0">          %+-::+#*==--++. ::-</tspan>
-<tspan x="70" y="607.0">          *#=-#@*=====*@=.:+:</tspan>
-<tspan x="70" y="622.0">          -@++%%#+:. .-++.=%</tspan>
-<tspan x="70" y="637.0">           @%**===:.:-. :=#%</tspan>
-<tspan x="70" y="652.0">           %@#=-=*@%#-:.:*@+</tspan>
-<tspan x="70" y="667.0">           :@%===-=+    =%@.</tspan>
+<tspan x="70" y="112.0">              .*##=:*@%-</tspan>
+<tspan x="70" y="127.0">           .*%%%#%%%@%#%%%#</tspan>
+<tspan x="70" y="142.0">           @@#%%%%#%%%%%%#%+</tspan>
+<tspan x="70" y="157.0">          *%%%%%@@%#%%%%%#%%*</tspan>
+<tspan x="70" y="172.0">        :@@%%%%%%%%%%@@%%#%%%%=</tspan>
+<tspan x="70" y="187.0">        @%%%@%%%%%%%@%@@%%%%%#%@</tspan>
+<tspan x="70" y="202.0">        %%%%%@@%%%%%%%%%@@@@@%%##</tspan>
+<tspan x="70" y="217.0">        @%%%%%%@%%%%%%@@%%@@%%%%@#</tspan>
+<tspan x="70" y="232.0">       +@%@%%##%%%%%%%%%@@%@@@@@%%.</tspan>
+<tspan x="70" y="247.0">       %%%@%%%%%%%%%%%%%#%@@@@@@%@=</tspan>
+<tspan x="70" y="262.0">       @%@@@@@@%%%%%%*-.:-#@%@@%%#</tspan>
+<tspan x="70" y="277.0">       @%@@@@%%%##*+-    .:*@%@%@:</tspan>
+<tspan x="70" y="292.0">       +@%@@%%*=-:.        :%%%@:</tspan>
+<tspan x="70" y="307.0">        %%%@#+:             +@%+</tspan>
+<tspan x="70" y="322.0">        +@**=-=+-.   :==-:: :%@</tspan>
+<tspan x="70" y="337.0">         @=*%@@@@#-.-#@@%#*= *=</tspan>
+<tspan x="70" y="352.0">         =+#%%%+##:  =*##*=. =</tspan>
+<tspan x="70" y="367.0">         =-:-=:.-=     ..    .:</tspan>
+<tspan x="70" y="382.0">        :*:     .:            =</tspan>
+<tspan x="70" y="397.0">         +-.    ::           .</tspan>
+<tspan x="70" y="412.0">         *=:   .-:.         .:</tspan>
+<tspan x="70" y="427.0">         #+-.  .=#*-=+     .:-</tspan>
+<tspan x="70" y="442.0">         **=:.  -%+:++    ..-.</tspan>
+<tspan x="70" y="457.0">          #+-::=*+====++. .:-</tspan>
+<tspan x="70" y="472.0">          +#=-%@#=--::+%+ :*.</tspan>
+<tspan x="70" y="487.0">           @#+#++=: .:..--*%</tspan>
+<tspan x="70" y="502.0">           #@#=--+##+-:.:*@=</tspan>
+<tspan x="70" y="517.0">            @%+-:.::    +%%</tspan>
+<tspan x="70" y="532.0">            %@%+::=+-.:*@#...</tspan>
+<tspan x="70" y="547.0">          :%+#@@%%%@%%%@*. .@:</tspan>
+<tspan x="70" y="562.0">          @#++#%@@@@@@#-   .##</tspan>
+<tspan x="70" y="577.0">         *%#+++*%@@%*=.     ##*.</tspan>
+<tspan x="70" y="592.0">        *@@%==++***=:      :%#**+=</tspan>
+<tspan x="70" y="607.0">     .*@@%%@*=---=-:       *%##**%%*-</tspan>
+<tspan x="70" y="622.0">   -%@@%%@%%#=-..::.      :%###***%%%%*-</tspan>
+<tspan x="70" y="637.0"> =@@%%%%@@@%#+=:...       #%###***#%%##%%*</tspan>
+<tspan x="70" y="652.0">@@%%%%%%@@@@%*--.        =%###****##%%%##%</tspan>
+<tspan x="70" y="667.0">%%%%%%%#%%@@%%+=-       :##*******###%#%%%</tspan>
   </text>
   <text x="535" y="88" class="terminal title">rahul@cryptoman-rahul <tspan class="muted">---------------------------</tspan></text>
 <text x="535" y="125" class="terminal muted">- System --------------------------------------------------</text>
 <text x="535" y="150" class="terminal"><tspan class="label">OS:</tspan> <tspan class="muted">...............................</tspan> <tspan class="value">macOS 26.5, Linux servers</tspan></text>
-<text x="535" y="175" class="terminal"><tspan class="label">Uptime:</tspan> <tspan class="muted">.........................</tspan> <tspan class="value">23 years, 6 months, 18 days</tspan></text>
+<text x="535" y="175" class="terminal"><tspan class="label">Uptime:</tspan> <tspan class="muted">....................................</tspan> <tspan class="value">23y 6m 18d</tspan> <tspan class="muted">+</tspan><tspan class="cursor">_</tspan></text>
+<text x="1190" y="175" class="terminal value" opacity="0">00s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0165;0.0167;1" values="1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">01s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0167;0.0168;0.0333;0.0334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">02s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0333;0.0334;0.0500;0.0501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">03s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0500;0.0501;0.0667;0.0668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">04s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0667;0.0668;0.0833;0.0834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">05s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.0833;0.0834;0.1000;0.1001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">06s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1000;0.1001;0.1167;0.1168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">07s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1167;0.1168;0.1333;0.1334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">08s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1333;0.1334;0.1500;0.1501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">09s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1500;0.1501;0.1667;0.1668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">10s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1667;0.1668;0.1833;0.1834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">11s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.1833;0.1834;0.2000;0.2001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">12s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2000;0.2001;0.2167;0.2168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">13s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2167;0.2168;0.2333;0.2334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">14s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2333;0.2334;0.2500;0.2501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">15s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2500;0.2501;0.2667;0.2668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">16s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2667;0.2668;0.2833;0.2834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">17s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.2833;0.2834;0.3000;0.3001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">18s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3000;0.3001;0.3167;0.3168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">19s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3167;0.3168;0.3333;0.3334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">20s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3333;0.3334;0.3500;0.3501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">21s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3500;0.3501;0.3667;0.3668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">22s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3667;0.3668;0.3833;0.3834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">23s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.3833;0.3834;0.4000;0.4001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">24s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4000;0.4001;0.4167;0.4168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">25s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4167;0.4168;0.4333;0.4334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">26s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4333;0.4334;0.4500;0.4501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">27s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4500;0.4501;0.4667;0.4668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">28s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4667;0.4668;0.4833;0.4834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">29s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.4833;0.4834;0.5000;0.5001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">30s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5000;0.5001;0.5167;0.5168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">31s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5167;0.5168;0.5333;0.5334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">32s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5333;0.5334;0.5500;0.5501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">33s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5500;0.5501;0.5667;0.5668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">34s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5667;0.5668;0.5833;0.5834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">35s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.5833;0.5834;0.6000;0.6001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">36s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6000;0.6001;0.6167;0.6168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">37s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6167;0.6168;0.6333;0.6334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">38s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6333;0.6334;0.6500;0.6501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">39s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6500;0.6501;0.6667;0.6668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">40s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6667;0.6668;0.6833;0.6834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">41s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.6833;0.6834;0.7000;0.7001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">42s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7000;0.7001;0.7167;0.7168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">43s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7167;0.7168;0.7333;0.7334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">44s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7333;0.7334;0.7500;0.7501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">45s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7500;0.7501;0.7667;0.7668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">46s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7667;0.7668;0.7833;0.7834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">47s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.7833;0.7834;0.8000;0.8001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">48s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8000;0.8001;0.8167;0.8168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">49s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8167;0.8168;0.8333;0.8334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">50s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8333;0.8334;0.8500;0.8501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">51s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8500;0.8501;0.8667;0.8668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">52s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8667;0.8668;0.8833;0.8834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">53s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.8833;0.8834;0.9000;0.9001;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">54s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9000;0.9001;0.9167;0.9168;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">55s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9167;0.9168;0.9333;0.9334;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">56s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9333;0.9334;0.9500;0.9501;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">57s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9500;0.9501;0.9667;0.9668;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">58s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9667;0.9668;0.9833;0.9834;1" values="0;0;1;1;0;0"/></text>
+<text x="1190" y="175" class="terminal value" opacity="0">59s<animate attributeName="opacity" dur="60s" repeatCount="indefinite" keyTimes="0;0.9833;0.9834;1" values="0;0;1;1"/></text>
 <text x="535" y="200" class="terminal"><tspan class="label">Host:</tspan> <tspan class="muted">.......................</tspan> <tspan class="value">cloud servers + backend systems</tspan></text>
 <text x="535" y="225" class="terminal"><tspan class="label">Kernel:</tspan> <tspan class="muted">..................................</tspan> <tspan class="value">Darwin 25.5.0, zsh</tspan></text>
 <text x="535" y="250" class="terminal"><tspan class="label">Focus:</tspan> <tspan class="muted">.............................</tspan> <tspan class="value">backend, cloud, security</tspan></text>
 <text x="535" y="275" class="terminal"><tspan class="label">Since:</tspan> <tspan class="muted">.................................</tspan> <tspan class="value">GitHub: Jul 31, 2021</tspan></text>
 <text x="535" y="312" class="terminal muted">- Work ----------------------------------------------------</text>
-<text x="535" y="337" class="terminal"><tspan class="label">Cloud.Backend:</tspan> <tspan class="muted">..............</tspan> <tspan class="value">APIs, VPS ops, infra automation</tspan></text>
-<text x="535" y="362" class="terminal"><tspan class="label">Security:</tspan> <tspan class="muted">........</tspan> <tspan class="value">bug bounty, harnesses, backend-only design</tspan></text>
-<text x="535" y="387" class="terminal"><tspan class="label">AI.Automation:</tspan> <tspan class="muted">..................</tspan> <tspan class="value">agents, scrapers, workflows</tspan></text>
-<text x="535" y="412" class="terminal"><tspan class="label">Languages:</tspan> <tspan class="muted">................</tspan> <tspan class="value">TypeScript, Python, C++, HTML, Go</tspan></text>
-<text x="535" y="449" class="terminal muted">- Contact -------------------------------------------------</text>
-<text x="535" y="474" class="terminal"><tspan class="label">GitHub:</tspan> <tspan class="muted">..........................</tspan> <tspan class="value">github.com/CryptoMaN-Rahul</tspan></text>
-<text x="535" y="499" class="terminal"><tspan class="label">LinkedIn:</tspan> <tspan class="muted">..........................</tspan> <tspan class="value">linkedin.com/in/0x-rahul</tspan></text>
-<text x="535" y="524" class="terminal"><tspan class="label">X:</tspan> <tspan class="muted">..............................................</tspan> <tspan class="value">@100x_rahul</tspan></text>
-<text x="535" y="549" class="terminal"><tspan class="label">Location:</tspan> <tspan class="muted">...............................................</tspan> <tspan class="value">Goa</tspan></text>
+<text x="535" y="337" class="terminal"><tspan class="label">Backend:</tspan> <tspan class="muted">............</tspan> <tspan class="value">APIs, services, databases, integrations</tspan></text>
+<text x="535" y="362" class="terminal"><tspan class="label">Cloud:</tspan> <tspan class="muted">.........</tspan> <tspan class="value">Linux servers, deployments, infra automation</tspan></text>
+<text x="535" y="387" class="terminal"><tspan class="label">Security:</tspan> <tspan class="muted">........</tspan> <tspan class="value">AppSec research, bug bounty, secure design</tspan></text>
+<text x="535" y="412" class="terminal"><tspan class="label">Automation:</tspan> <tspan class="muted">...........</tspan> <tspan class="value">AI agents, scrapers, workflow tooling</tspan></text>
+<text x="535" y="437" class="terminal"><tspan class="label">Languages:</tspan> <tspan class="muted">..........</tspan> <tspan class="value">TypeScript, Python, C++, Go, JavaScript</tspan></text>
+<text x="535" y="474" class="terminal muted">- Contact -------------------------------------------------</text>
+<text x="535" y="499" class="terminal"><tspan class="label">GitHub:</tspan> <tspan class="muted">..........................</tspan> <tspan class="value">github.com/CryptoMaN-Rahul</tspan></text>
+<text x="535" y="524" class="terminal"><tspan class="label">LinkedIn:</tspan> <tspan class="muted">..........................</tspan> <tspan class="value">linkedin.com/in/0x-rahul</tspan></text>
+<text x="535" y="549" class="terminal"><tspan class="label">X:</tspan> <tspan class="muted">.................................</tspan> <tspan class="value">https://x.com/100x_rahul</tspan></text>
 <text x="535" y="586" class="terminal muted">- GitHub Stats --------------------------------------------</text>
-<text x="535" y="611" class="terminal"><tspan class="label">Repos:</tspan> <tspan class="muted">...................</tspan> <tspan class="value">58 {Contributed: 1,405} | Stars: 5</tspan></text>
-<text x="535" y="636" class="terminal"><tspan class="label">Commits:</tspan> <tspan class="muted">................................</tspan> <tspan class="value">296 | Followers: 15</tspan></text>
-<text x="535" y="661" class="terminal"><tspan class="label">Lines of Code on GitHub:</tspan> <tspan class="muted">...</tspan> <tspan class="value">1,254,214</tspan> <tspan class="muted">(</tspan><tspan class="green">7,509,360++</tspan><tspan class="muted">, </tspan><tspan class="red">6,255,146--</tspan><tspan class="muted">)</tspan></text>
+<text x="535" y="611" class="terminal"><tspan class="label">Repos:</tspan> <tspan class="muted">........................................</tspan> <tspan class="value">58 | Stars: 5</tspan></text>
+<text x="535" y="636" class="terminal"><tspan class="label">Commits:</tspan> <tspan class="muted">..............</tspan> <tspan class="value">296 repo | 57 contrib | Followers: 15</tspan></text>
+<text x="535" y="661" class="terminal"><tspan class="label">Contribs:</tspan> <tspan class="muted">............</tspan> <tspan class="value">1,406 visible + 1,334 private | PRs: 1</tspan></text>
+<text x="535" y="686" class="terminal"><tspan class="label">Lines of Code on GitHub:</tspan> <tspan class="muted">...</tspan> <tspan class="value">1,254,214</tspan> <tspan class="muted">(</tspan><tspan class="green">7,509,360++</tspan><tspan class="muted">, </tspan><tspan class="red">6,255,146--</tspan><tspan class="muted">)</tspan></text>
 </svg>
