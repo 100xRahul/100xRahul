@@ -26,10 +26,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 1280
 HEIGHT = 720
-ASCII_COLS = 48
-ASCII_ROWS = 44
-ASCII_FONT_SIZE = 15
-ASCII_LINE_HEIGHT = 14.4
+ASCII_COLS = 64
+ASCII_ROWS = 46
+ASCII_FONT_SIZE = 12
+ASCII_LINE_HEIGHT = 13.2
 TERM_X = 535
 TERM_Y = 88
 TERM_LINE_HEIGHT = 25
@@ -46,7 +46,7 @@ DEFAULT_X = "@100x_rahul"
 DEFAULT_ASCII = ROOT / "assets" / "profile_ascii.txt"
 DEFAULT_STATS_CACHE = ROOT / "assets" / "profile_stats_cache.json"
 USER_AGENT = "cryptoman-rahul-profile-card"
-DEFAULT_PHOTO_CROP = "0.28,0.055,0.72,0.60"
+DEFAULT_PHOTO_CROP = "0.15,0.03,0.85,0.72"
 
 
 @dataclass(frozen=True)
@@ -810,7 +810,7 @@ def terminal_lines(stats: GitHubStats, theme: dict[str, str]) -> str:
 
 
 def build_svg(ascii_lines: list[str], stats: GitHubStats, theme: dict[str, str]) -> str:
-    ascii_spans = svg_text_lines(ascii_lines, 48, 58)
+    ascii_spans = svg_text_lines(ascii_lines, 42, 72)
     title = f"{stats.name} GitHub profile card"
     return f'''<svg width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">{escape_text(title)}</title>
