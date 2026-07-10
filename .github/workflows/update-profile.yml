@@ -27,7 +27,7 @@ jobs:
         env:
           PROFILE_STATS_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROFILE_LOGIN: CryptoMaN-Rahul
+          PROFILE_LOGIN: 100xRahul
           PROFILE_OS: macOS 26.5, Linux servers
           PROFILE_KERNEL: Darwin 25.5.0, zsh
           PROFILE_HOST: cloud servers + backend systems

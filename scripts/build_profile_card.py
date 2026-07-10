@@ -27,10 +27,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 1280
 HEIGHT = 720
-ASCII_COLS = 64
-ASCII_ROWS = 46
-ASCII_FONT_SIZE = 12
-ASCII_LINE_HEIGHT = 13.2
+ASCII_COLS = 72
+ASCII_ROWS = 50
+ASCII_FONT_SIZE = 11
+ASCII_LINE_HEIGHT = 12.5
 TERM_X = 535
 TERM_Y = 88
 TERM_LINE_HEIGHT = 25
@@ -41,15 +41,19 @@ LINE_STAT_WORKERS = 8
 TICK_X = 1190
 
 DATE_OF_BIRTH = date(2002, 12, 21)
-DEFAULT_LOGIN = "CryptoMaN-Rahul"
+DEFAULT_LOGIN = "100xRahul"
 DEFAULT_LINKEDIN = "linkedin.com/in/0x-rahul"
 DEFAULT_X = "@100x_rahul"
 DEFAULT_ASCII = ROOT / "assets" / "profile_ascii.txt"
 DEFAULT_README = ROOT / "README.md"
 DEFAULT_STATS_CACHE = ROOT / "assets" / "profile_stats_cache.json"
-README_REPO = "CryptoMaN-Rahul/CryptoMaN-Rahul"
-USER_AGENT = "cryptoman-rahul-profile-card"
-DEFAULT_PHOTO_CROP = "0.15,0.03,0.85,0.72"
+# GitHub exposes the current owner/repository to Actions. That lets the card's
+# image URL follow a future profile-repository rename without another code edit.
+README_REPO = os.environ.get("GITHUB_REPOSITORY", "").strip() or "100xRahul/100xRahul"
+USER_AGENT = "100xrahul-profile-card"
+# Remove only the passport-photo backdrop and polo-shirt area. The complete
+# hair, cheek, chin, and neck outline stays within the portrait.
+DEFAULT_PHOTO_CROP = "0.17,0.00,0.83,0.68"
 
 
 @dataclass(frozen=True)
@@ -491,7 +495,12 @@ def with_line_stats(
     repos = stats.repos_for_line_stats[:max_repos]
     workers = max(1, env_int("PROFILE_LINE_STAT_WORKERS", LINE_STAT_WORKERS))
     cache = load_stats_cache(cache_path)
-    cached_entries = cache.get("repos") if isinstance(cache.get("repos"), dict) else {}
+    cache_login = cache.get("login")
+    if isinstance(cache_login, str) and cache_login.lower() != stats.login.lower():
+        warn("GitHub login changed; rebuilding the per-repository line-stat cache")
+        cached_entries = {}
+    else:
+        cached_entries = cache.get("repos") if isinstance(cache.get("repos"), dict) else {}
     next_entries: dict[str, dict] = {}
     aggregate = {"commits": 0, "additions": 0, "deletions": 0}
     repos_to_fetch: list[RepoSnapshot] = []
@@ -691,14 +700,15 @@ def photo_to_ascii(photo: Path) -> list[str]:
         int(width * right),
         int(height * bottom),
     ))
-    image = ImageOps.autocontrast(image, cutoff=1)
-    image = image.filter(ImageFilter.UnsharpMask(radius=1.2, percent=180, threshold=3))
-    image = ImageEnhance.Contrast(image).enhance(1.75)
-    image = ImageEnhance.Brightness(image).enhance(1.07)
+    image = ImageOps.autocontrast(image, cutoff=0.5)
+    # Preserve the larger facial shapes while removing tiny skin-texture noise.
+    image = image.filter(ImageFilter.GaussianBlur(radius=0.35))
+    image = ImageEnhance.Contrast(image).enhance(1.05)
+    image = ImageEnhance.Brightness(image).enhance(1.10)
     image = image.resize((ASCII_COLS, ASCII_ROWS), Image.Resampling.LANCZOS)
 
-    ramp = "    .:-=+*#%@"
-    gamma = 1.42
+    ramp = "      .,:;irsXA25hHG#%@"
+    gamma = 1.70
     rows: list[str] = []
     for y in range(ASCII_ROWS):
         chars = []
