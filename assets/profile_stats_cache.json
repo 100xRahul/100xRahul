@@ -5,7 +5,7 @@
       "additions": 3246,
       "commits": 19,
       "deletions": 1623,
-      "head_oid": "f62aa590282249b25d0318089529021517f35237"
+      "head_oid": "df530a9cc2d6f90f3c07ad90ad0be193d4e6cbb2"
     },
     "100xRahul/AIpaper": {
       "additions": 32346,
@@ -78,6 +78,12 @@
       "commits": 0,
       "deletions": 0,
       "head_oid": "cf7138de618976e1153cfff60f28acc2acc54dae"
+    },
+    "100xRahul/agent-k-signoz": {
+      "additions": 18701,
+      "commits": 36,
+      "deletions": 2103,
+      "head_oid": "96413bfc6469683adabb1eeb857271d3b256dc47"
     },
     "100xRahul/amazon-ml-challenge-2024": {
       "additions": 390,
@@ -333,5 +339,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-07-25T14:02:22"
+  "updated_at": "2026-07-25T19:34:49"
 }
