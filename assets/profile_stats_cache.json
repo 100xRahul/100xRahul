@@ -5,7 +5,7 @@
       "additions": 3246,
       "commits": 19,
       "deletions": 1623,
-      "head_oid": "f08d1af09291daf1c1cd9e447c9c0c2170452b85"
+      "head_oid": "7f803ab9f302777a22ebb6273f96fcbff2104778"
     },
     "100xRahul/AIpaper": {
       "additions": 32346,
@@ -307,6 +307,12 @@
       "deletions": 0,
       "head_oid": "e6923f326f778b6ad960494a4a43e98f81c870f2"
     },
+    "100xRahul/tradeguardian-zerodha-fno-discipline": {
+      "additions": 10143,
+      "commits": 5,
+      "deletions": 814,
+      "head_oid": "b3f879962895b3342ee67754cc8eaf56e8d5128c"
+    },
     "100xRahul/uAgents": {
       "additions": 80,
       "commits": 1,
@@ -339,5 +345,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-07-27T15:14:13"
+  "updated_at": "2026-07-27T19:55:33"
 }
