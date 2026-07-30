@@ -162,7 +162,7 @@
 <text x="535" y="362" class="terminal"><tspan class="label">Cloud:</tspan> <tspan class="muted">.........</tspan> <tspan class="value">Linux servers, deployments, infra automation</tspan></text>
 <text x="535" y="387" class="terminal"><tspan class="label">Security:</tspan> <tspan class="muted">........</tspan> <tspan class="value">AppSec research, bug bounty, secure design</tspan></text>
 <text x="535" y="412" class="terminal"><tspan class="label">Automation:</tspan> <tspan class="muted">...........</tspan> <tspan class="value">AI agents, scrapers, workflow tooling</tspan></text>
-<text x="535" y="437" class="terminal"><tspan class="label">Languages:</tspan> <tspan class="muted">..........</tspan> <tspan class="value">TypeScript, Python, Go, C++, JavaScript</tspan></text>
+<text x="535" y="437" class="terminal"><tspan class="label">Languages:</tspan> <tspan class="muted">..........</tspan> <tspan class="value">TypeScript, Python, C++, JavaScript, Go</tspan></text>
 <text x="535" y="474" class="terminal muted">- Contact -------------------------------------------------</text>
 <text x="535" y="499" class="terminal"><tspan class="label">GitHub:</tspan> <tspan class="muted">................................</tspan> <tspan class="value">github.com/100xRahul</tspan></text>
 <text x="535" y="524" class="terminal"><tspan class="label">LinkedIn:</tspan> <tspan class="muted">..........................</tspan> <tspan class="value">linkedin.com/in/0x-rahul</tspan></text>
