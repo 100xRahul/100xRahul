@@ -1,6 +1,6 @@
 <a href="https://github.com/100xRahul/100xRahul">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/100xRahul/100xRahul/main/dark_mode.svg?v=0acef9f">
-    <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/100xRahul/100xRahul/main/light_mode.svg?v=0acef9f">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/100xRahul/100xRahul/main/dark_mode.svg?v=5e99f9b">
+    <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/100xRahul/100xRahul/main/light_mode.svg?v=5e99f9b">
   </picture>
 </a>
