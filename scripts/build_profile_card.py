@@ -92,9 +92,9 @@ class GitHubStats:
 THEMES = {
     "light": {
         "file": "light_mode.svg",
-        "canvas": "#e6eaef",
-        "panel": "#eaeef2",
-        "border": "#c8d1da",
+        "canvas": "#d8dee4",
+        "panel": "#dde3e9",
+        "border": "#bcc6d0",
         "ascii": "#57606a",
         "title": "#24292f",
         "muted": "#6e7781",
