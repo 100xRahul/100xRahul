@@ -79,8 +79,6 @@ class GitHubStats:
     forks: int
     default_branch_commits: int
     authored_commits: int | None
-    lines_added: int | None
-    lines_deleted: int | None
     visible_contributions: int | None
     private_contributions: int | None
     commit_contributions: int | None
@@ -92,19 +90,6 @@ class GitHubStats:
 
 
 THEMES = {
-    "dark": {
-        "file": "dark_mode.svg",
-        "canvas": "#0d1117",
-        "panel": "#161b22",
-        "border": "#30363d",
-        "ascii": "#c9d1d9",
-        "title": "#e6edf3",
-        "muted": "#6e7681",
-        "label": "#ffa657",
-        "value": "#a5d6ff",
-        "green": "#3fb950",
-        "red": "#ff7b72",
-    },
     "light": {
         "file": "light_mode.svg",
         "canvas": "#ffffff",
@@ -115,8 +100,6 @@ THEMES = {
         "muted": "#8c959f",
         "label": "#bc4c00",
         "value": "#0969da",
-        "green": "#1a7f37",
-        "red": "#cf222e",
     },
 }
 
@@ -349,8 +332,6 @@ def fetch_graphql_stats(login: str, token: str) -> GitHubStats:
         forks=sum(int(repo.get("forkCount") or 0) for repo in repos),
         default_branch_commits=sum(repository_commit_count(repo) for repo in repos),
         authored_commits=None,
-        lines_added=None,
-        lines_deleted=None,
         visible_contributions=calendar_data.get("totalContributions"),
         private_contributions=contributions.get("restrictedContributionsCount"),
         commit_contributions=contributions.get("totalCommitContributions"),
@@ -409,8 +390,6 @@ def fetch_rest_stats(login: str, token: str | None) -> GitHubStats:
         forks=sum(int(repo.get("forks_count") or 0) for repo in repos),
         default_branch_commits=0,
         authored_commits=None,
-        lines_added=None,
-        lines_deleted=None,
         visible_contributions=None,
         private_contributions=None,
         commit_contributions=None,
@@ -588,12 +567,7 @@ def with_line_stats(
         warn(f"Line stats incomplete ({unresolved} repo(s) pending); leaving totals unavailable")
         return stats
 
-    return replace(
-        stats,
-        authored_commits=aggregate["commits"],
-        lines_added=aggregate["additions"],
-        lines_deleted=aggregate["deletions"],
-    )
+    return replace(stats, authored_commits=aggregate["commits"])
 
 
 def fetch_github_stats(
@@ -630,13 +604,6 @@ def commit_summary(stats: GitHubStats) -> str:
     if commits is None:
         commits = stats.default_branch_commits
     return format_int(commits)
-
-
-def lines_summary(stats: GitHubStats) -> str:
-    if stats.lines_added is None or stats.lines_deleted is None:
-        return "unavailable"
-    net = stats.lines_added - stats.lines_deleted
-    return f"{format_int(net)} ({format_int(stats.lines_added)}++, {format_int(stats.lines_deleted)}--)"
 
 
 def animated_seconds(y: int) -> str:
@@ -706,7 +673,6 @@ def profile_lines(stats: GitHubStats) -> list[tuple[str, str | None]]:
         ("Repos", f"{format_int(stats.public_repos)} | Stars: {format_int(stats.stars)} | Followers: {format_int(stats.followers)}"),
         ("Commits", f"{commit_summary(stats)} repo | {format_int(stats.commit_contributions)} contrib | Merged PRs: {format_int(stats.merged_pull_requests)}"),
         ("Contribs", contribution_summary(stats)),
-        ("Lines of Code on GitHub", lines_summary(stats)),
     ]
 
 
@@ -903,21 +869,6 @@ def render_line(label: str, value: str, y: int, theme: dict[str, str]) -> str:
             "</text>\n"
             f"{animated_seconds(y)}"
         )
-    if label == "Lines of Code on GitHub" and " (" in value and "++, " in value and "--)" in value:
-        net, rest = value.split(" (", 1)
-        additions, deletions = rest.removesuffix(")").split(", ", 1)
-        return (
-            f'<text x="{TERM_X}" y="{y}" class="terminal">'
-            f'<tspan class="label">{escape_text(label)}:</tspan> '
-            f'<tspan class="muted">{dots}</tspan> '
-            f'<tspan class="value">{escape_text(net)}</tspan> '
-            f'<tspan class="muted">(</tspan>'
-            f'<tspan class="green">{escape_text(additions)}</tspan>'
-            f'<tspan class="muted">, </tspan>'
-            f'<tspan class="red">{escape_text(deletions)}</tspan>'
-            f'<tspan class="muted">)</tspan>'
-            "</text>"
-        )
     return (
         f'<text x="{TERM_X}" y="{y}" class="terminal">'
         f'<tspan class="label">{escape_text(label)}:</tspan> '
@@ -976,8 +927,6 @@ def build_svg(ascii_lines: list[str], stats: GitHubStats, theme: dict[str, str])
     .muted {{ fill: {theme["muted"]}; }}
     .label {{ fill: {theme["label"]}; }}
     .value {{ fill: {theme["value"]}; }}
-    .green {{ fill: {theme["green"]}; }}
-    .red {{ fill: {theme["red"]}; }}
     .cursor {{
       fill: {theme["value"]};
       animation: blink 1s steps(2, start) infinite;
@@ -1005,10 +954,7 @@ def svg_cache_version(*svg_paths: Path) -> str:
 
 def update_readme_cache_bust(version: str, readme_path: Path = DEFAULT_README) -> bool:
     content = f'''<a href="https://github.com/{README_REPO}">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/{README_REPO}/main/dark_mode.svg?v={version}">
-    <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/{README_REPO}/main/light_mode.svg?v={version}">
-  </picture>
+  <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/{README_REPO}/main/light_mode.svg?v={version}">
 </a>
 '''
     if readme_path.read_text(encoding="utf-8") == content:
