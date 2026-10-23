@@ -12,7 +12,7 @@
       letter-spacing: 0;
     }
     .title { fill: #24292f; }
-    .muted { fill: #8c959f; }
+    .muted { fill: #6e7781; }
     .label { fill: #bc4c00; }
     .value { fill: #0969da; }
     .cursor {
@@ -23,8 +23,8 @@
       50% { opacity: 0; }
     }
   </style>
-  <rect width="1280" height="720" rx="18" fill="#ffffff"/>
-  <rect x="24" y="24" width="1232" height="672" rx="18" fill="#f6f8fa" stroke="#d0d7de" stroke-width="2"/>
+  <rect width="1280" height="720" rx="18" fill="#e6eaef"/>
+  <rect x="24" y="24" width="1232" height="672" rx="18" fill="#eaeef2" stroke="#c8d1da" stroke-width="2"/>
   <text class="ascii" xml:space="preserve">
 <tspan x="42" y="72.0"></tspan>
 <tspan x="42" y="82.3"></tspan>
@@ -167,6 +167,6 @@
 <text x="535" y="549" class="terminal"><tspan class="label">X:</tspan> <tspan class="muted">.........................................</tspan> <tspan class="value">x.com/100x_rahul</tspan></text>
 <text x="535" y="586" class="terminal muted">- GitHub Stats --------------------------------------------</text>
 <text x="535" y="611" class="terminal"><tspan class="label">Repos:</tspan> <tspan class="muted">........................</tspan> <tspan class="value">62 | Stars: 5 | Followers: 15</tspan></text>
-<text x="535" y="636" class="terminal"><tspan class="label">Commits:</tspan> <tspan class="muted">...........</tspan> <tspan class="value">374 repo | 148 contrib | Merged PRs: 527</tspan></text>
-<text x="535" y="661" class="terminal"><tspan class="label">Contribs:</tspan> <tspan class="muted">.....................</tspan> <tspan class="value">3,992 visible + 3,826 private</tspan></text>
+<text x="535" y="636" class="terminal"><tspan class="label">Commits:</tspan> <tspan class="muted">...........</tspan> <tspan class="value">374 repo | 149 contrib | Merged PRs: 527</tspan></text>
+<text x="535" y="661" class="terminal"><tspan class="label">Contribs:</tspan> <tspan class="muted">.....................</tspan> <tspan class="value">3,993 visible + 3,826 private</tspan></text>
 </svg>
