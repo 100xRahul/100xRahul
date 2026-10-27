@@ -1,3 +1,3 @@
 <a href="https://github.com/100xRahul/100xRahul">
-  <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/100xRahul/100xRahul/main/light_mode.svg?v=c942a7c">
+  <img alt="Rahul R M's GitHub profile README" src="https://raw.githubusercontent.com/100xRahul/100xRahul/main/light_mode.svg?v=4f38b45">
 </a>
