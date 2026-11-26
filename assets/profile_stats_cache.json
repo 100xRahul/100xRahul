@@ -1,12 +1,6 @@
 {
   "login": "100xRahul",
   "repos": {
-    "100xRahul/100xRahul": {
-      "additions": 3259,
-      "commits": 22,
-      "deletions": 1871,
-      "head_oid": "c655ea8beee011144b95b238c6d320e50d415e96"
-    },
     "100xRahul/AIpaper": {
       "additions": 32346,
       "commits": 7,
@@ -351,5 +345,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-11-25T21:42:44"
+  "updated_at": "2026-11-26T08:19:52"
 }
